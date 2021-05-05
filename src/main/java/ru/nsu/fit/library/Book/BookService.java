@@ -1,9 +1,6 @@
-package ru.nsu.fit.library.Service;
+package ru.nsu.fit.library.Book;
 
 import org.springframework.stereotype.Service;
-import ru.nsu.fit.library.Entity.Book;
-import ru.nsu.fit.library.Repository.BookRepository;
-
 import java.util.List;
 
 @Service

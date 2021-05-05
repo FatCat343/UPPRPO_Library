@@ -1,4 +1,4 @@
-package ru.nsu.fit.library.Entity;
+package ru.nsu.fit.library.Book;
 
 import javax.persistence.*;
 
