@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "reader")
 public class Reader {
     @Id
-    @SequenceGenerator(name = "reader_generator", sequenceName = "reader_seq")
+    @SequenceGenerator(name = "reader_generator", sequenceName = "reader_seq", initialValue = 4)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reader_generator")
     @Column(name = "reader_id")
     private Integer id;
@@ -18,6 +18,21 @@ public class Reader {
     private String lastName;
 
     public Reader() {
+    }
+
+    public Reader(Reader object) {
+        if (object == null) new Reader();
+        else {
+            this.id = object.getId();
+            this.firstName = object.getFirstName();
+            this.lastName = object.getLastName();
+        }
+    }
+
+    public Reader(Integer id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Integer getId() {

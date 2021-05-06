@@ -17,11 +17,15 @@ public class ReaderService {
         return (List<Reader>) readerRepository.findAll();
     }
 
-    public void save(Reader reader){
-        readerRepository.save(reader);
+    public Reader save(Reader reader){
+        return readerRepository.save(reader);
     }
 
     public void delete(Reader reader){
         readerRepository.delete(reader);
+    }
+
+    boolean exist(Reader reader){
+        return readerRepository.existsReaderByFirstNameAndLastName(reader.getId(), reader.getFirstName(), reader.getLastName());
     }
 }
