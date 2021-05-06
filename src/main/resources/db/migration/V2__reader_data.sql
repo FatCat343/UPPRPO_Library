@@ -1,3 +1,3 @@
-INSERT INTO reader (reader_id, firstname, lastname) VALUES (1, 'Иванов', 'Иван');
-INSERT INTO reader (reader_id, firstname, lastname) VALUES (2, 'Семенов', 'Семен');
-INSERT INTO reader (reader_id, firstname, lastname) VALUES (3, 'Петров', 'Петр');
+INSERT INTO reader (reader_id, firstname, lastname) VALUES (1, 'Иван', 'Иванов');
+INSERT INTO reader (reader_id, firstname, lastname) VALUES (2, 'Семен', 'Семенов');
+INSERT INTO reader (reader_id, firstname, lastname) VALUES (3, 'Петр', 'Петров');
