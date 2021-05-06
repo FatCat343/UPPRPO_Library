@@ -19,6 +19,16 @@ public class Book {
 
     public Book() {}
 
+    public Book(Book object) {
+        if (object == null) {
+            new Book();
+        } else {
+            this.id = object.getId();
+            this.title = object.title;
+            this.author = object.author;
+        }
+    }
+
     public Long getId() {
         return id;
     }
