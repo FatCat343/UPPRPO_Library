@@ -1,4 +1,4 @@
-package ru.nsu.fit.library.Book;
+package ru.nsu.fit.library.book;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
