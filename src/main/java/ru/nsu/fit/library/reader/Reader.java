@@ -3,12 +3,12 @@ package ru.nsu.fit.library.reader;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "reader")
+@Table(name = "readers")
 public class Reader {
     @Id
-    @SequenceGenerator(name = "reader_generator", sequenceName = "reader_seq", initialValue = 4)
+    @SequenceGenerator(name = "reader_generator", sequenceName = "reader_seq", initialValue = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reader_generator")
-    @Column(name = "reader_id")
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "firstname")

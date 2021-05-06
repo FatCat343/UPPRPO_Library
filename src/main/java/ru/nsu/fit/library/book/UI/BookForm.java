@@ -16,7 +16,6 @@ import ru.nsu.fit.library.book.Book;
 import ru.nsu.fit.library.book.BookService;
 import ru.nsu.fit.library.book.author.Author;
 import ru.nsu.fit.library.book.author.AuthorService;
-;
 
 public class BookForm extends VerticalLayout {
     TextField title = new TextField("Title");

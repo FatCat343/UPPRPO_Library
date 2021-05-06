@@ -7,8 +7,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.router.Route;
+import ru.nsu.fit.library.main.UI.MainView;
 
-@Route(value = "readers")
+@Route(value = "readers", layout = MainView.class)
 public class ReaderView extends VerticalLayout {
     private final ReaderService readerService;
     private final Grid<Reader> grid = new Grid<>(Reader.class);

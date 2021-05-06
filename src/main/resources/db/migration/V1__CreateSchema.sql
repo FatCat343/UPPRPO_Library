@@ -13,3 +13,11 @@ CREATE TABLE books
     CONSTRAINT PK_books PRIMARY KEY (id),
     CONSTRAINT FK_books_authors FOREIGN KEY (author_id) REFERENCES authors
 );
+
+CREATE TABLE readers
+(
+    id           integer NOT NULL,
+    firstName           varchar(50) NOT NULL,
+    lastName            varchar(50) NOT NULL,
+    CONSTRAINT PK_reader PRIMARY KEY ( id )
+);

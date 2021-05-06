@@ -110,7 +110,7 @@ public class BookView extends VerticalLayout {
                 },
 
                 query -> {
-                    return (int) getBookService().getCount(query.getLimit());
+                    return (int) getBookService().findAll().size();
                 }
         );
         return dataProvider;
