@@ -12,7 +12,7 @@ public class Distribution {
     @Id
     @SequenceGenerator(name = "distribution_generator", sequenceName = "distribution_seq", initialValue = 60)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "distribution_generator")
-    @Column(name = "distribution_id")
+    @Column(name = "id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -90,3 +90,28 @@ INSERT INTO books (id, title, author_id) VALUES (28, 'How globalization influenc
 INSERT INTO books (id, title, author_id) VALUES (29, 'Most popular American words in 2020', 17);
 INSERT INTO books (id, title, author_id) VALUES (30, 'Should animals choose a gender', 18);
 INSERT INTO books (id, title, author_id) VALUES (31, 'New genders of last 10 years', 18);
+
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (1, 1, 1, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (2, 2, 2, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (3, 3, 3, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (4, 4, 4, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (5, 5, 5, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (6, 6, 6, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (7, 7, 7, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (8, 8, 8, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (9, 9, 9, '2015-03-16', '2015-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (10, 1, 10, '2016-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (11, 11, 11, '2016-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (12, 12, 12, '2016-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (13, 13, 13, '2016-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (14, 14, 14, '2016-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (15, 15, 15, '2016-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (16, 1, 16, '2016-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (17, 2, 17, '2016-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (18, 3, 18, '2015-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (19, 4, 19, '2015-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (20, 5, 10, '2015-03-16', '2016-04-16');
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (21, 6, 1, '2021-03-16', NULL);
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (22, 7, 2, '2021-03-16', NULL);
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (23, 8, 3, '2021-03-16', NULL);
+INSERT INTO distribution (id, reader_id, book_id, date_give, date_return) VALUES (24, 9, 4, '2021-03-16', NULL);

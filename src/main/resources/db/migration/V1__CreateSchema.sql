@@ -24,12 +24,12 @@ CREATE TABLE readers
 
 CREATE TABLE distribution
 (
-    distribution_id integer NOT NULL,
+    id integer NOT NULL,
     reader_id       integer NOT NULL,
     book_id         bigint NOT NULL,
     date_give       date NOT NULL,
     date_return     date,
-    CONSTRAINT PK_distribution PRIMARY KEY ( distribution_id ),
+    CONSTRAINT PK_distribution PRIMARY KEY ( id ),
     CONSTRAINT FK_reader FOREIGN KEY ( reader_id ) REFERENCES readers ( id ),
     CONSTRAINT FK_edition FOREIGN KEY ( book_id ) REFERENCES books ( id )
 );
