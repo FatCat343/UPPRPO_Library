@@ -42,4 +42,8 @@ public class BookService {
         return bookRepository.existsBookByTitleAndAuthor(book.getTitle(), book.getAuthor());
     }
 
+    public List<Book> findNotGiven(){
+        return bookRepository.findNotGiven();
+    }
+
 }
