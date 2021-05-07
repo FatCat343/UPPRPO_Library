@@ -13,13 +13,13 @@ class ReaderRepositoryTest {
 
     @Test
     void existsReaderByFirstNameAndLastName() {
-        Reader reader1 = new Reader(4, "Иван", "Иванов");
+        Reader reader1 = new Reader(1, "Иван", "Иванов");
         Reader reader2 = new Reader(5, "Иван", "Иванов");
         Reader reader3 = new Reader(null, "Иван", "Иванов");
-        Reader reader4 = new Reader(4, "Иван", "Петров");
+        Reader reader4 = new Reader(1, "Иван", "Петров");
         Reader reader5 = new Reader(null, "Иван", "Петров");
 
-        repository.save(reader1);
+        //repository.save(reader1);
 
         boolean expected1 = repository.
                 existsReaderByFirstNameAndLastName(reader1.getId(), reader1.getFirstName(), reader1.getLastName());
