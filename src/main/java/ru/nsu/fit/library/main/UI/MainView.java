@@ -6,6 +6,7 @@ import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.router.RouterLink;
 import ru.nsu.fit.library.book.UI.BookView;
 import ru.nsu.fit.library.book.author.UI.AuthorView;
+import ru.nsu.fit.library.distribution.UI.DistributionView;
 import ru.nsu.fit.library.reader.ReaderView;
 
 public class MainView extends AppLayout {
@@ -15,10 +16,12 @@ public class MainView extends AppLayout {
         MenuItem books = menuBar.addItem("Books");
         MenuItem author = menuBar.addItem("Authors");
 		MenuItem reader = menuBar.addItem("Readers");
+        MenuItem distribution = menuBar.addItem("Distributions");
 
         books.getSubMenu().addItem(new RouterLink("Books", BookView.class));
         author.getSubMenu().addItem(new RouterLink("Authors", AuthorView.class));
 		reader.getSubMenu().addItem(new RouterLink("Readers", ReaderView.class));
+        distribution.getSubMenu().addItem(new RouterLink("Distributions", DistributionView.class));
 
         addToNavbar(menuBar);
     }
