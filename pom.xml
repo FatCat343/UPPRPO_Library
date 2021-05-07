@@ -10,7 +10,7 @@
     </parent>
     <groupId>ru.nsu.fit</groupId>
     <artifactId>library</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>Library</name>
     <description>Library</description>
     <properties>
