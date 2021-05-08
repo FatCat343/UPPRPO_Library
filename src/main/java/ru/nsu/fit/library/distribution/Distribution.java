@@ -29,6 +29,17 @@ public class Distribution {
     @Column(name = "date_return")
     private LocalDate dateReturn;
 
+    public Distribution() {
+    }
+
+    public Distribution(Integer id, Reader reader, Book book, LocalDate dateGive, LocalDate dateReturn) {
+        this.id = id;
+        this.reader = reader;
+        this.book = book;
+        this.dateGive = dateGive;
+        this.dateReturn = dateReturn;
+    }
+
     public Integer getId() {
         return id;
     }
