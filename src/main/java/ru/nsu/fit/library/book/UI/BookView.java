@@ -7,24 +7,23 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
-import org.vaadin.gatanaso.MultiselectComboBox;
 import org.vaadin.klaudeta.PaginatedGrid;
 import ru.nsu.fit.library.book.Book;
 import ru.nsu.fit.library.book.BookService;
 import ru.nsu.fit.library.book.author.Author;
 import ru.nsu.fit.library.book.author.AuthorService;
 import ru.nsu.fit.library.main.UI.MainView;
-
 import java.util.List;
 
 @Route(value = "books", layout = MainView.class)
 public class BookView extends VerticalLayout {
-    private BookService bookService;
-    private PaginatedGrid<Book> grid = new PaginatedGrid<>(Book.class);
+    private final TextField filterText = new TextField();
+    private final BookService bookService;
+    private final PaginatedGrid<Book> grid = new PaginatedGrid<>(Book.class);
 
     DataProvider<Book, Void> dataProvider;
 
-    private BookForm form;
+    private final BookForm form;
 
     public BookView(BookService bookService, AuthorService authorService) {
         this.bookService = bookService;
@@ -43,10 +42,19 @@ public class BookView extends VerticalLayout {
     }
 
     private HorizontalLayout configureToolBar() {
+        filterText.setPlaceholder("Filter by name...");
+        filterText.setClearButtonVisible(true);
+        filterText.setValueChangeMode(ValueChangeMode.LAZY);
+        filterText.addValueChangeListener(e -> listBooks());
+
         Button addBookButton = new Button("Add Book");
         addBookButton.addClickListener(click -> addBook());
 
-        return new HorizontalLayout(addBookButton);
+        return new HorizontalLayout(filterText, addBookButton);
+    }
+
+    private void listBooks() {
+        grid.setItems(bookService.findAll(filterText.getValue()));
     }
 
     void addBook() {

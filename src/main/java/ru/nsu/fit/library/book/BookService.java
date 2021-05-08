@@ -1,9 +1,7 @@
 package ru.nsu.fit.library.book;
 
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ru.nsu.fit.library.book.author.Author;
 
 import java.util.List;
 
@@ -18,6 +16,14 @@ public class BookService {
 
     public List<Book> findAll() {
         return (List<Book>) bookRepository.findAll();
+    }
+
+    public List<Book> findAll(String filterText) {
+        if (filterText == null || filterText.isEmpty()) {
+            return bookRepository.findAll();
+        } else {
+            return bookRepository.search(filterText);
+        }
     }
 
     public List<Book> fetch(int page, int limit) {
