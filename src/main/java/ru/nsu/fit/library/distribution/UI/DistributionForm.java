@@ -85,9 +85,7 @@ public class DistributionForm extends VerticalLayout {
 
     private void validateAndSave() {
         try{
-            System.out.println("validating");
             distributionBinder.writeBean(distribution);
-            System.out.println("validated");
             fireEvent(new saveEvent(this, distribution));
         }
         catch (ValidationException err) {
