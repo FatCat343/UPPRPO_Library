@@ -66,7 +66,7 @@ public class DistributionView extends VerticalLayout {
         });
         HorizontalLayout filter = new HorizontalLayout(startDate, finishDate);
         filter.setAlignItems(Alignment.BASELINE);
-        HorizontalLayout toolBar = new HorizontalLayout(addDistributionButton, filter);
+        HorizontalLayout toolBar = new HorizontalLayout(filter, addDistributionButton);
         toolBar.setAlignItems(Alignment.BASELINE);
         return toolBar;
     }
