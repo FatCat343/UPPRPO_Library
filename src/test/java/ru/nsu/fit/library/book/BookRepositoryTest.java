@@ -14,7 +14,6 @@ public class BookRepositoryTest {
     private BookRepository bookRepository;
 
     @Test
-    @Disabled
     void findNotGiven() {
         List<Book> notGivenBooks = bookRepository.findNotGiven();
         StringBuilder str = new StringBuilder();
@@ -31,14 +30,14 @@ public class BookRepositoryTest {
         boolean val7 = str.toString().contains("War and Peace");
         boolean val8 = str.toString().contains("Hyperion");
 
+        assertThat(val5).isTrue();
+        assertThat(val6).isTrue();
+        assertThat(val7).isTrue();
+        assertThat(val8).isTrue();
         assertThat(val1).isFalse();
-        assertThat(val2).isTrue();
-        assertThat(val3).isTrue();
-        assertThat(val4).isTrue();
-        assertThat(val5).isFalse();
-        assertThat(val6).isFalse();
-        assertThat(val7).isFalse();
-        assertThat(val8).isFalse();
+        assertThat(val2).isFalse();
+        assertThat(val3).isFalse();
+        assertThat(val4).isFalse();
 
     }
 }

@@ -18,10 +18,10 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query(value = """
             SELECT *\s
-            FROM library_schema.books b
+            FROM books b
             WHERE b.id NOT IN (
             \tSELECT bo.id\s
-            \tFROM library_schema.books bo JOIN library_schema.distribution di ON bo.id = di.book_id
+            \tFROM books bo JOIN distribution di ON bo.id = di.book_id
             \tWHERE di.date_return IS NULL
             )""", nativeQuery = true)
     List<Book> findNotGiven();
