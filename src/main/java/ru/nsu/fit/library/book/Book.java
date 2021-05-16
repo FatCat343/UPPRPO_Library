@@ -19,6 +19,12 @@ public class Book {
 
     public Book() {}
 
+    public Book(Long id, String title, Author author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+    }
+
     public Book(Book object) {
         if (object == null) {
             new Book();

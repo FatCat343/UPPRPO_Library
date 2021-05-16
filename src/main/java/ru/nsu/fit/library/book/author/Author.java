@@ -51,6 +51,13 @@ public class Author implements Serializable {
 
     public Author() {}
 
+    public Author(Long id, String firstName, String lastName, List<Book> books) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.books = books;
+    }
+
     public Author(Author object) {
         if (object == null) {
             new Author();
