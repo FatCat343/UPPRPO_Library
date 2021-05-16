@@ -19,9 +19,19 @@ CREATE TABLE books
 CREATE TABLE bookPosition
 (
     position_id  integer NOT NULL,
+    storage_id   integer NOT NULL,
     rack_number  integer NOT NULL,
     shelf_number integer NOT NULL,
-    CONSTRAINT PK_bookPosition PRIMARY KEY ( position_id )
+    CONSTRAINT PK_bookPosition PRIMARY KEY ( position_id ),
+    CONSTRAINT FK_bookPosition_storage FOREIGN KEY ( storage_id ) REFERENCES storage ( storage_id )
+);
+
+CREATE TABLE storage
+(
+    storage_id  integer NOT NULL,
+    library_id  integer NOT NULL,
+    room_number integer NOT NULL,
+    CONSTRAINT PK_storage PRIMARY KEY ( storage_id )
 );
 
 CREATE TABLE readers
