@@ -6,15 +6,20 @@ CREATE TABLE authors
     CONSTRAINT PK_authors PRIMARY KEY (id)
 );
 
-CREATE TABLE books
+CREATE TABLE library
 (
-    id bigint NOT NULL,
-    title varchar(50) NOT NULL,
-    author_id  bigint NOT NULL,
-    position_id bigint NOT NULL,
-    CONSTRAINT PK_books PRIMARY KEY (id),
-    CONSTRAINT FK_books_authors FOREIGN KEY (author_id) REFERENCES authors ( id ),
-    CONSTRAINT FK_books_bookPosition FOREIGN KEY (position_id) REFERENCES bookPosition ( position_id )
+    library_id bigint NOT NULL,
+    address    varchar(50) NOT NULL,
+    CONSTRAINT PK_library PRIMARY KEY ( library_id )
+);
+
+CREATE TABLE storage
+(
+    storage_id  bigint NOT NULL,
+    library_id  bigint NOT NULL,
+    room_number bigint NOT NULL,
+    CONSTRAINT PK_storage PRIMARY KEY ( storage_id ),
+    CONSTRAINT FK_storage_library FOREIGN KEY ( library_id ) REFERENCES library ( library_id )
 );
 
 CREATE TABLE bookPosition
@@ -27,21 +32,15 @@ CREATE TABLE bookPosition
     CONSTRAINT FK_bookPosition_storage FOREIGN KEY ( storage_id ) REFERENCES storage ( storage_id )
 );
 
-CREATE TABLE storage
+CREATE TABLE books
 (
-    storage_id  bigint NOT NULL,
-    library_id  bigint NOT NULL,
-    room_number bigint NOT NULL,
-    CONSTRAINT PK_storage PRIMARY KEY ( storage_id ),
-    CONSTRAINT FK_storage_library FOREIGN KEY ( library_id ) REFERENCES library ( library_id )
-);
-
-CREATE TABLE library
-(
-    library_id bigint NOT NULL,
-    address    varchar(50) NOT NULL,
-    name       varchar(50) NOT NULL,
-    CONSTRAINT PK_library PRIMARY KEY ( library_id )
+    id bigint NOT NULL,
+    title varchar(50) NOT NULL,
+    author_id  bigint NOT NULL,
+    position_id bigint NOT NULL,
+    CONSTRAINT PK_books PRIMARY KEY (id),
+    CONSTRAINT FK_books_authors FOREIGN KEY (author_id) REFERENCES authors ( id ),
+    CONSTRAINT FK_books_bookPosition FOREIGN KEY (position_id) REFERENCES bookPosition ( position_id )
 );
 
 CREATE TABLE readers
