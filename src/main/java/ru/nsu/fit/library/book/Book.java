@@ -1,6 +1,7 @@
 package ru.nsu.fit.library.book;
 
 import ru.nsu.fit.library.book.author.Author;
+import ru.nsu.fit.library.bookPosition.BookPosition;
 
 import javax.persistence.*;
 
@@ -17,12 +18,17 @@ public class Book {
     @ManyToOne(targetEntity = Author.class, cascade = CascadeType.PERSIST)
     private Author author;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "position_id")
+    private BookPosition bookPosition;
+
     public Book() {}
 
-    public Book(Long id, String title, Author author) {
+    public Book(Long id, String title, Author author, BookPosition bookPosition) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.bookPosition = bookPosition;
     }
 
     public Book(Book object) {
@@ -32,6 +38,7 @@ public class Book {
             this.id = object.getId();
             this.title = object.title;
             this.author = object.author;
+            this.bookPosition = object.bookPosition;
         }
     }
 
@@ -58,6 +65,14 @@ public class Book {
     public void setAuthor(Author author) {
         this.author = author;
     }
+
+//    public BookPosition getBookPosition() {
+//        return bookPosition;
+//    }
+//
+//    public void setBookPosition(BookPosition bookPosition) {
+//        this.bookPosition = bookPosition;
+//    }
 
     @Override
     public String toString() {
