@@ -1,6 +1,7 @@
 package ru.nsu.fit.library.distribution;
 
 import org.springframework.stereotype.Service;
+import ru.nsu.fit.library.reader.Reader;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -66,5 +67,10 @@ public class DistributionService {
         entityManager.getTransaction().commit();
         entityManager.close();
         return resEdition;
+    }
+
+    public List<Distribution> findAllByReader(Reader reader) {
+        if (reader == null) return new ArrayList<>();
+        else return distributionRepository.findAllByReader(reader);
     }
 }
