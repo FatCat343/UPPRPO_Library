@@ -1,10 +1,12 @@
 package ru.nsu.fit.library.distribution;
 
 import ru.nsu.fit.library.book.Book;
+import ru.nsu.fit.library.distribution.rentalPeriod.RentalPeriod;
 import ru.nsu.fit.library.reader.Reader;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "distribution")
@@ -23,6 +25,10 @@ public class Distribution {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rental_period_id")
+    private RentalPeriod rentalPeriod;
+
     @Column(name = "date_give")
     private LocalDate dateGive;
 
@@ -32,12 +38,13 @@ public class Distribution {
     public Distribution() {
     }
 
-    public Distribution(Integer id, Reader reader, Book book, LocalDate dateGive, LocalDate dateReturn) {
+    public Distribution(Integer id, Reader reader, Book book, RentalPeriod rentalPeriod, LocalDate dateGive, LocalDate dateReturn) {
         this.id = id;
         this.reader = reader;
         this.book = book;
         this.dateGive = dateGive;
         this.dateReturn = dateReturn;
+        this.rentalPeriod = rentalPeriod;
     }
 
     public Integer getId() {
@@ -79,5 +86,12 @@ public class Distribution {
     public void setDateReturn(LocalDate dateReturn) {
         this.dateReturn = dateReturn;
     }
-}
 
+    public RentalPeriod getRentalPeriod() {
+        return rentalPeriod;
+    }
+
+    public void setRentalPeriod(RentalPeriod rentalPeriod) {
+        this.rentalPeriod = rentalPeriod;
+    }
+}
