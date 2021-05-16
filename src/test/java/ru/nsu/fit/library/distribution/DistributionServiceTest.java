@@ -11,6 +11,7 @@ import ru.nsu.fit.library.reader.Reader;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -62,5 +63,21 @@ public class DistributionServiceTest {
 
         service.delete(d1);
         verify(repository, times(1)).delete(d1);
+    }
+
+    @Test
+    @DisplayName("Test findAllByReader(reader)")
+    void testFindAllByReader() {
+        Reader r1 = new Reader(1, "Alex", "Smith");
+        Book b1 = new Book();
+        Distribution d1 = new Distribution(1, r1, b1, LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
+        Distribution d2 = new Distribution(1, r1, b1, LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
+        doReturn(Arrays.asList(d1, d2)).when(repository).findAllByReader(any());
+
+        List<Distribution> result1 = service.findAllByReader(null);
+        Assertions.assertEquals(0, result1.size(), "findAllByReader(null) should return 0 objects");
+
+        List<Distribution> result2 = service.findAllByReader(r1);
+        Assertions.assertEquals(2, result2.size(), "findAllByReader(not_null_reader) should return 2 objects");
     }
 }
