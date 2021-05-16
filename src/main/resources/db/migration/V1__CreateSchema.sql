@@ -51,14 +51,23 @@ CREATE TABLE readers
     CONSTRAINT PK_reader PRIMARY KEY ( id )
 );
 
+CREATE TABLE rental_periods
+(
+    id      integer NOT NULL,
+    days    integer NOT NULL,
+    CONSTRAINT PK_period PRIMARY KEY ( id )
+);
+
 CREATE TABLE distribution
 (
-    id integer NOT NULL,
-    reader_id       integer NOT NULL,
-    book_id         bigint NOT NULL,
-    date_give       date NOT NULL,
-    date_return     date,
+    id                  integer NOT NULL,
+    reader_id           integer NOT NULL,
+    book_id             bigint NOT NULL,
+    rental_period_id    integer NOT NULL,
+    date_give           date NOT NULL,
+    date_return         date,
     CONSTRAINT PK_distribution PRIMARY KEY ( id ),
     CONSTRAINT FK_reader FOREIGN KEY ( reader_id ) REFERENCES readers ( id ),
+    CONSTRAINT FK_rental FOREIGN KEY ( rental_period_id ) REFERENCES rental_periods ( id ),
     CONSTRAINT FK_edition FOREIGN KEY ( book_id ) REFERENCES books ( id )
 );
