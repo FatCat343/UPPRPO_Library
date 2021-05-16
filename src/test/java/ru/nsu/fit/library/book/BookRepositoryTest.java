@@ -1,7 +1,11 @@
 package ru.nsu.fit.library.book;
 
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
@@ -38,6 +42,15 @@ public class BookRepositoryTest {
         assertThat(val2).isFalse();
         assertThat(val3).isFalse();
         assertThat(val4).isFalse();
+
+    }
+
+    @ParameterizedTest
+    @CsvSource({"The, 7", "a, 25", "Java,0", "The Hobbit, 1"})
+    @DisplayName("test search()")
+    void testSearch(String input, Integer expected){
+        List<Book> result = bookRepository.search(input);
+        Assertions.assertEquals(expected, result.size());
 
     }
 }
