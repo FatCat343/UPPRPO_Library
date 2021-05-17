@@ -15,6 +15,8 @@ import ru.nsu.fit.library.book.Book;
 import ru.nsu.fit.library.book.BookService;
 import ru.nsu.fit.library.distribution.Distribution;
 import ru.nsu.fit.library.distribution.DistributionService;
+import ru.nsu.fit.library.distribution.rentalPeriod.RentalPeriod;
+import ru.nsu.fit.library.distribution.rentalPeriod.RentalPeriodService;
 import ru.nsu.fit.library.reader.Reader;
 import ru.nsu.fit.library.reader.ReaderService;
 
@@ -26,6 +28,7 @@ public class DistributionForm extends VerticalLayout {
 
     ComboBox<Reader> reader = new ComboBox<>("Reader");
     ComboBox<Book> book = new ComboBox<>("Book");
+    ComboBox<RentalPeriod> rentalPeriod = new ComboBox<>("Rental Period:");
 
     Button save = new Button("save");
     Button delete = new Button("delete");
@@ -37,7 +40,7 @@ public class DistributionForm extends VerticalLayout {
     private Distribution distribution;
 
     public DistributionForm(ReaderService readerService, BookService bookService,
-                            DistributionService distributionService) {
+                            RentalPeriodService rentalPeriodService, DistributionService distributionService) {
         this.distributionService = distributionService;
         this.bookService = bookService;
         distributionBinder.bindInstanceFields(this);
@@ -45,6 +48,8 @@ public class DistributionForm extends VerticalLayout {
         reader.setRequired(true);
         book.setItems(bookService.findNotGiven());
         book.setRequired(true);
+        rentalPeriod.setItems(rentalPeriodService.findAll());
+        rentalPeriod.setRequired(true);
         dateGive.setRequired(true);
 
         add(createFieldsLayout(), createButtonsLayout());
@@ -67,7 +72,7 @@ public class DistributionForm extends VerticalLayout {
                 dateGive.setMax(null);
             }
         });
-        return new HorizontalLayout(book, reader, dateGive, dateReturn);
+        return new HorizontalLayout(book, reader, rentalPeriod, dateGive, dateReturn);
     }
 
     private HorizontalLayout createButtonsLayout() {

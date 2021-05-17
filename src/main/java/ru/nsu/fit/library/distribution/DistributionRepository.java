@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface DistributionRepository extends CrudRepository<Distribution, Integer> {
-    @Query(value = "SELECT d FROM Distribution d JOIN FETCH d.book b JOIN FETCH d.reader r WHERE d.id = :id")
+    @Query(value = "SELECT d FROM Distribution d JOIN FETCH d.book b JOIN FETCH d.rentalPeriod rp JOIN FETCH d.reader r WHERE d.id = :id")
     Distribution findDistributionByIdFetch(@Param("id") Integer id);
 
     List<Distribution> findAllByReader(Reader reader);
