@@ -17,31 +17,35 @@ import ru.nsu.fit.library.distribution.Distribution;
 import ru.nsu.fit.library.distribution.DistributionService;
 import ru.nsu.fit.library.distribution.rentalPeriod.RentalPeriod;
 import ru.nsu.fit.library.distribution.rentalPeriod.RentalPeriodService;
+import ru.nsu.fit.library.distribution.rentalPeriod.UI.RentalPeriodForm;
 import ru.nsu.fit.library.reader.Reader;
 import ru.nsu.fit.library.reader.ReaderService;
 
 import java.time.LocalDate;
 
 public class DistributionForm extends VerticalLayout {
-    DatePicker dateGive = new DatePicker("Give Date");
-    DatePicker dateReturn = new DatePicker("Return Date");
+    private final DatePicker dateGive = new DatePicker("Give Date");
+    private final DatePicker dateReturn = new DatePicker("Return Date");
 
-    ComboBox<Reader> reader = new ComboBox<>("Reader");
-    ComboBox<Book> book = new ComboBox<>("Book");
-    ComboBox<RentalPeriod> rentalPeriod = new ComboBox<>("Rental Period:");
+    private final ComboBox<Reader> reader = new ComboBox<>("Reader");
+    private final ComboBox<Book> book = new ComboBox<>("Book");
+    private final ComboBox<RentalPeriod> rentalPeriod = new ComboBox<>("Rental Period:");
 
     Button save = new Button("save");
     Button delete = new Button("delete");
     Button close = new Button("close");
 
-    Binder<Distribution> distributionBinder = new Binder<>(Distribution.class);
-    DistributionService distributionService;
-    BookService bookService;
+    private final Binder<Distribution> distributionBinder = new Binder<>(Distribution.class);
+    private final DistributionService distributionService;
+    private final BookService bookService;
     private Distribution distribution;
+    private final RentalPeriodService rentalPeriodService;
+    private final RentalPeriodForm rentalPeriodForm;
 
     public DistributionForm(ReaderService readerService, BookService bookService,
                             RentalPeriodService rentalPeriodService, DistributionService distributionService) {
         this.distributionService = distributionService;
+        this.rentalPeriodService = rentalPeriodService;
         this.bookService = bookService;
         distributionBinder.bindInstanceFields(this);
         reader.setItems(readerService.findAll());
@@ -52,10 +56,18 @@ public class DistributionForm extends VerticalLayout {
         rentalPeriod.setRequired(true);
         dateGive.setRequired(true);
 
-        add(createFieldsLayout(), createButtonsLayout());
+        rentalPeriodForm = new RentalPeriodForm();
+        rentalPeriodForm.addListener(RentalPeriodForm.saveEvent.class,  this::saveRentalPeriod);
+        rentalPeriodForm.addListener(RentalPeriodForm.closeEvent.class, e -> closeEditor());
+
+        add(createFieldsLayout(), createButtonsLayout(), rentalPeriodForm);
+
+        closeEditor();
     }
 
     private HorizontalLayout createFieldsLayout() {
+        Button addRentalPeriod = new Button("Add Rental Period");
+        addRentalPeriod.addClickListener(click -> addRentalPeriod());
         dateGive.addValueChangeListener(event -> {
             LocalDate selected = event.getValue();
             if (selected != null) {
@@ -72,7 +84,9 @@ public class DistributionForm extends VerticalLayout {
                 dateGive.setMax(null);
             }
         });
-        return new HorizontalLayout(book, reader, rentalPeriod, dateGive, dateReturn);
+        HorizontalLayout fields = new HorizontalLayout(book, reader, rentalPeriod, dateGive, dateReturn, addRentalPeriod);
+        fields.setAlignItems(Alignment.BASELINE);
+        return fields;
     }
 
     private HorizontalLayout createButtonsLayout() {
@@ -100,6 +114,22 @@ public class DistributionForm extends VerticalLayout {
 
     public void setBooks(){
         book.setItems(bookService.findNotGiven());
+    }
+
+    private void closeEditor() {
+        rentalPeriodForm.setRentalPeriod(null);
+        rentalPeriodForm.setVisible(false);
+    }
+
+    private void addRentalPeriod() {
+        rentalPeriodForm.setRentalPeriod(new RentalPeriod());
+        rentalPeriodForm.setVisible(true);
+    }
+
+    private void saveRentalPeriod(RentalPeriodForm.saveEvent event) {
+        rentalPeriodService.save(event.getRentalPeriod());
+        this.rentalPeriod.setItems(rentalPeriodService.findAll());
+        closeEditor();
     }
 
     public void setDistributionNotFetched(Distribution distribution) {
