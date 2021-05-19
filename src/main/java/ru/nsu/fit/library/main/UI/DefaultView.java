@@ -6,9 +6,8 @@ import com.vaadin.flow.router.Route;
 
 @Route(value = "", layout = MainView.class)
 public class DefaultView extends VerticalLayout {
-
-    private final Header header = new Header();
     public DefaultView() {
+        Header header = new Header();
         header.setText("Library");
     }
 }
