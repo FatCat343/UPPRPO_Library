@@ -8,6 +8,7 @@ import ru.nsu.fit.library.book.UI.BookView;
 import ru.nsu.fit.library.book.author.UI.AuthorView;
 import ru.nsu.fit.library.bookPosition.UI.BookPositionView;
 import ru.nsu.fit.library.distribution.UI.DistributionView;
+import ru.nsu.fit.library.library.UI.LibraryView;
 import ru.nsu.fit.library.reader.ReaderView;
 import ru.nsu.fit.library.storage.UI.StorageView;
 
@@ -22,6 +23,7 @@ public class MainView extends AppLayout {
         MenuItem distribution = menuBar.addItem("Distributions");
         MenuItem bookPosition = menuBar.addItem("Book position");
         MenuItem storage = menuBar.addItem("Storage");
+        MenuItem library = menuBar.addItem("Library");
 
         books.getSubMenu().addItem(new RouterLink("Books", BookView.class));
         author.getSubMenu().addItem(new RouterLink("Authors", AuthorView.class));
@@ -29,6 +31,7 @@ public class MainView extends AppLayout {
         distribution.getSubMenu().addItem(new RouterLink("Distributions", DistributionView.class));
         bookPosition.getSubMenu().addItem(new RouterLink("Book position", BookPositionView.class));
         storage.getSubMenu().addItem(new RouterLink("Storage", StorageView.class));
+        library.getSubMenu().addItem(new RouterLink("Library", LibraryView.class));
 
         addToNavbar(menuBar);
     }
