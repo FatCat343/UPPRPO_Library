@@ -9,6 +9,7 @@ import com.vaadin.flow.router.Route;
 import ru.nsu.fit.library.book.BookService;
 import ru.nsu.fit.library.distribution.Distribution;
 import ru.nsu.fit.library.distribution.DistributionService;
+import ru.nsu.fit.library.distribution.rentalPeriod.RentalPeriodService;
 import ru.nsu.fit.library.main.UI.MainView;
 import ru.nsu.fit.library.reader.ReaderService;
 
@@ -25,12 +26,12 @@ public class DistributionView extends VerticalLayout {
     private final DistributionForm form;
 
     public DistributionView(DistributionService distributionService, ReaderService readerService,
-                            BookService bookService) {
+                            BookService bookService, RentalPeriodService rentalPeriodService) {
         this.distributionService = distributionService;
         setSizeFull();
         HorizontalLayout toolbar = configureToolBar();
         configureGrid();
-        form = new DistributionForm(readerService, bookService, distributionService);
+        form = new DistributionForm(readerService, bookService, rentalPeriodService, distributionService);
         form.addListener(DistributionForm.saveEvent.class, this::saveDistribution);
         form.addListener(DistributionForm.deleteEvent.class, this::deleteDistribution);
         form.addListener(DistributionForm.closeEvent.class, e -> closeEditor());
@@ -82,6 +83,14 @@ public class DistributionView extends VerticalLayout {
             Distribution tmp = distributionService.findDistributionFetch(distribution);
             return tmp.getReader();
         }).setHeader("Reader").setSortProperty("reader");
+        grid.addColumn(distribution -> {
+            Distribution tmp = distributionService.findDistributionFetch(distribution);
+            if (tmp.getDateReturn() != null) return "Returned";
+            else {
+                LocalDate rental =  tmp.getDateGive().plusDays(tmp.getRentalPeriod().getDays());
+                return "Not returned, deadline: " + rental;
+            }
+        }).setHeader("Return status").setSortProperty("return_status");
         grid.addColumn(Distribution::getDateGive).setHeader("Give Date").setSortProperty("dateGive");
         grid.addColumn(Distribution::getDateReturn).setHeader("Return Date").setSortProperty("dateReturn");
         grid.asSingleSelect().addValueChangeListener(event -> editDistribution(event.getValue()));

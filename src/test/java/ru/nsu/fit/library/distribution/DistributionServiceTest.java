@@ -29,8 +29,8 @@ public class DistributionServiceTest {
     void testFindAll() {
         Reader r1 = new Reader(1, "Alex", "Smith");
         Book b1 = new Book();
-        Distribution d1 = new Distribution(1, r1, b1, null, LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
-        Distribution d2 = new Distribution(1, r1, b1, null, LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
+        Distribution d1 = new Distribution(1, r1, b1, null,  LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
+        Distribution d2 = new Distribution(1, r1, b1, null,  LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
         doReturn(Arrays.asList(d1, d2)).when(repository).findAll();
 
         List<Distribution> result = service.findAll();
@@ -43,7 +43,7 @@ public class DistributionServiceTest {
     void testSave() {
         Reader r1 = new Reader(1, "Alex", "Smith");
         Book b1 = new Book();
-        Distribution d1 = new Distribution(1, r1, b1, null, LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
+        Distribution d1 = new Distribution(1, r1, b1, null,  LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
         doReturn(d1).when(repository).save(any());
 
         Distribution result = service.save(d1);

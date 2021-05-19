@@ -11,6 +11,8 @@ import ru.nsu.fit.library.main.UI.MainView;
 import ru.nsu.fit.library.reader.Reader;
 import ru.nsu.fit.library.reader.ReaderService;
 
+import java.time.LocalDate;
+
 @Route(value = "distribution_by_reader", layout = MainView.class)
 public class DistributionByReaderView extends VerticalLayout {
     private final DistributionService distributionService;
@@ -45,6 +47,14 @@ public class DistributionByReaderView extends VerticalLayout {
             Distribution tmp = distributionService.findDistributionFetch(distribution);
             return tmp.getBook();
         }).setHeader("Book").setSortProperty("book");
+        grid.addColumn(distribution -> {
+            Distribution tmp = distributionService.findDistributionFetch(distribution);
+            if (tmp.getDateReturn() != null) return "Returned, date: " + tmp.getDateReturn().toString();
+            else {
+                LocalDate rental =  tmp.getDateGive().plusDays(tmp.getRentalPeriod().getDays());
+                return "Not returned, deadline: " + rental;
+            }
+        }).setHeader("Return status").setSortProperty("return_status");
         grid.addColumn(Distribution::getDateGive).setHeader("Give Date").setSortProperty("dateGive");
         grid.addColumn(Distribution::getDateReturn).setHeader("Return Date").setSortProperty("dateReturn");
     }
