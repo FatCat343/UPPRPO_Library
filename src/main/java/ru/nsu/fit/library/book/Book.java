@@ -15,7 +15,7 @@ public class Book {
 
     private String title;
 
-    @ManyToOne(targetEntity = Author.class, cascade = CascadeType.PERSIST)
+    @ManyToOne(targetEntity = Author.class)
     private Author author;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -66,13 +66,22 @@ public class Book {
         this.author = author;
     }
 
-//    public BookPosition getBookPosition() {
-//        return bookPosition;
-//    }
-//
-//    public void setBookPosition(BookPosition bookPosition) {
-//        this.bookPosition = bookPosition;
-//    }
+    public BookPosition getBookPosition() {
+        return bookPosition;
+    }
+
+    public void setBookPosition(BookPosition bookPosition) {
+        this.bookPosition = bookPosition;
+    }
+
+    public String getBookLocation() {
+        String rack = bookPosition.getRackNumber().toString();
+        String shelf = bookPosition.getShelfNumber().toString();
+        String roomNumber = bookPosition.getStorage().getRoomNumber().toString();
+        String library = bookPosition.getStorage().getLibrary().getAddress();
+
+        return "Library: " + library + ",  Room: " + roomNumber + ",  Shelf: " + shelf + ",  Rack: " + rack;
+    }
 
     @Override
     public String toString() {

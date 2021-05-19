@@ -2,6 +2,8 @@ package ru.nsu.fit.library.bookPosition;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookPositionService {
     private final BookPositionRepository bookPositionRepository;
@@ -10,5 +12,7 @@ public class BookPositionService {
         this.bookPositionRepository = bookPositionRepository;
     }
 
-
+    public List<BookPosition> findAllFetch() {
+        return bookPositionRepository.findAllFetch();
+    }
 }
