@@ -24,6 +24,12 @@ public class Storage implements Serializable {
     public Storage() {
     }
 
+    public Storage(Integer id, Library library, Integer roomNumber) {
+        this.id = id;
+        this.library = library;
+        this.roomNumber = roomNumber;
+    }
+
     public Storage(Storage object) {
         if (object == null) new Storage();
         else {

@@ -26,6 +26,11 @@ public class Library implements Serializable {
     public Library() {
     }
 
+    public Library(Integer id, String address) {
+        this.id = id;
+        this.address = address;
+    }
+
     public Integer getId() {
         return id;
     }
