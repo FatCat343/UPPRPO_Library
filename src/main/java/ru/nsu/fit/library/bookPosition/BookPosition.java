@@ -35,6 +35,13 @@ public class BookPosition implements Serializable {
         }
     }
 
+    public BookPosition(Integer id, Storage storage, Integer rackNumber, Integer shelfNumber) {
+        this.id = id;
+        this.storage = storage;
+        this.rackNumber = rackNumber;
+        this.shelfNumber = shelfNumber;
+    }
+
     public BookPosition() {
     }
 
