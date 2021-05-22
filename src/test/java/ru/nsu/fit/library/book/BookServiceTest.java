@@ -111,4 +111,13 @@ public class BookServiceTest {
         service.findNotGiven();
         verify(repository, times(1)).findNotGiven();
     }
+
+    @Test
+    @DisplayName("test findBooksByPopularity()")
+    void findBooksByPopularity() {
+        doReturn(new ArrayList<>()).when(repository).findBooksByPopularity();
+        service.findBooksByPopularity();
+        verify(repository, times(1)).findBooksByPopularity();
+    }
+
 }
