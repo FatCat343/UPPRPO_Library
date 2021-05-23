@@ -21,6 +21,6 @@ public interface ReaderRepository extends CrudRepository<Reader, Integer> {
             join books b on b.id = d.book_id
             join rental_periods rp on rp.id = d.rental_period_id
             where d.date_return is null and d.date_give + rp.days < now()""", nativeQuery = true)
-    List<Object[]> findReaderExpired();
+    List<Object[]> findReadersExpired();
 
 }

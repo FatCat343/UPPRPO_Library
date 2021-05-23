@@ -28,7 +28,7 @@ public class ReaderService {
         return readerRepository.existsReaderByFirstNameAndLastName(reader.getId(), reader.getFirstName(), reader.getLastName());
     }
 
-    public List<Object[]> findReaderExpired() {
-        return readerRepository.findReaderExpired();
+    public List<Object[]> findReadersExpired() {
+        return readerRepository.findReadersExpired();
     }
 }

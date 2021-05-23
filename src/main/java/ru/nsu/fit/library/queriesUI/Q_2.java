@@ -31,7 +31,7 @@ public class Q_2 extends VerticalLayout {
     }
 
     private void listBooks() {
-        List<Object[]> artistList = readerService.findReaderExpired();
+        List<Object[]> artistList = readerService.findReadersExpired();
         if (artistList.isEmpty()) {
             grid.setItems(Collections.emptyList());
         } else grid.setItems(artistList);
