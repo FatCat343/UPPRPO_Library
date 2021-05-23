@@ -27,4 +27,8 @@ public class ReaderService {
     boolean exist(Reader reader){
         return readerRepository.existsReaderByFirstNameAndLastName(reader.getId(), reader.getFirstName(), reader.getLastName());
     }
+
+    public List<Object[]> findReaderExpired() {
+        return readerRepository.findReaderExpired();
+    }
 }
