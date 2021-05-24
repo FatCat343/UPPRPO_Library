@@ -65,6 +65,22 @@ public class DistributionServiceTest {
     }
 
     @Test
+    @DisplayName("Test findDistributionFetch")
+    void testFindDistributionFetch(){
+        Reader r1 = new Reader(1, "Alex", "Smith");
+        Book b1 = new Book();
+        Distribution d1 = new Distribution(1, r1, b1, null,  LocalDate.parse("2016-03-16"), LocalDate.parse("2016-03-16"));
+        doReturn(d1).when(repository).findDistributionByIdFetch(1);
+
+        Distribution result1 = service.findDistributionFetch(d1);
+        Assertions.assertNotNull(result1, "The returned distribution should not be null");
+        Assertions.assertEquals(result1, d1);
+
+        Distribution result2 = service.findDistributionFetch(null);
+        Assertions.assertNull(result2, "The returned distribution should be null");
+    }
+
+    @Test
     @DisplayName("Test findAllByReader(reader)")
     void testFindAllByReader() {
         Reader r1 = new Reader(1, "Alex", "Smith");
