@@ -10,8 +10,8 @@ import java.io.Serializable;
 @Table(name = "bookposition")
 public class BookPosition implements Serializable {
     @Id
-    @SequenceGenerator(name = "bookPosition_generator", sequenceName = "bookPosition_sequence", initialValue = 50)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookPosition_generator")
+    @SequenceGenerator(name = "bookposition_generator", sequenceName = "bookposition_sequence", initialValue = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookposition_generator")
     @Column(name = "position_id")
     private Integer id;
 
