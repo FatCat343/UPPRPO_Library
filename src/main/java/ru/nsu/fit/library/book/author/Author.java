@@ -1,6 +1,5 @@
 package ru.nsu.fit.library.book.author;
 
-import org.apache.commons.compress.archivers.zip.PKWareExtraHeader;
 import ru.nsu.fit.library.book.Book;
 
 import javax.persistence.*;
@@ -22,8 +21,9 @@ public class Author implements Serializable {
     @Column(name = "lastname")
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private List<Book> books;
+//    Пока закомментировал, т.к. конфликтует с "ON DELETE CASCADE" в скриптах создания таблиц бд
+//    @OneToMany(cascade = CascadeType.REMOVE)
+//    private List<Book> books;
 
     public Long getId() {
         return id;
@@ -55,7 +55,7 @@ public class Author implements Serializable {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.books = books;
+//        this.books = books;
     }
 
     public Author(Author object) {
