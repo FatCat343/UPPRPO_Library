@@ -26,4 +26,13 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
             )""", nativeQuery = true)
     List<Book> findNotGiven();
 
+    @Query(value = """
+            select b.title as title, concat(a.firstname, ' ', a.lastname) as name, COUNT(b.id) as count
+            from books b
+            join distribution d on b.id = d.book_id
+            join authors a on a.id = b.author_id
+            group by title, name
+            order by count desc""", nativeQuery = true)
+    List<Object[]> findBooksByPopularity();
+
 }

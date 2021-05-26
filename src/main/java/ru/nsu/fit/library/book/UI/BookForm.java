@@ -16,10 +16,13 @@ import ru.nsu.fit.library.book.Book;
 import ru.nsu.fit.library.book.BookService;
 import ru.nsu.fit.library.book.author.Author;
 import ru.nsu.fit.library.book.author.AuthorService;
+import ru.nsu.fit.library.bookPosition.BookPosition;
+import ru.nsu.fit.library.bookPosition.BookPositionService;
 
 public class BookForm extends VerticalLayout {
     TextField title = new TextField("Title");
     ComboBox<Author> author = new ComboBox<>("Author");
+    ComboBox<BookPosition> position = new ComboBox<>("Location");
 
     Button save = new Button("save");
     Button delete = new Button("delete");
@@ -30,7 +33,7 @@ public class BookForm extends VerticalLayout {
     Binder<Book> bookBinder = new Binder<>(Book.class);
     private Book book;
 
-    public BookForm(AuthorService authorService, BookService bookService) {
+    public BookForm(AuthorService authorService, BookService bookService, BookPositionService bookPositionService) {
         this.bookService = bookService;
         bookBinder.bindInstanceFields(this);
         bookBinder.forField(title)
@@ -38,16 +41,20 @@ public class BookForm extends VerticalLayout {
                 .withValidator(max -> max.length() <= 100, "Maximum 100 letters")
                 .bind(Book::getTitle, Book::setTitle);
         author.setItems(authorService.findAll());
+        bookBinder.forField(position)
+                .asRequired("Required Field")
+                .bind(Book::getBookPosition, Book::setBookPosition);
+
+        position.setItems(bookPositionService.findAllFetch());
 
         title.setRequired(true);
         author.setRequired(true);
-
 
         add(createFieldsLayout(), createButtonsLayout());
     }
 
     private HorizontalLayout createFieldsLayout() {
-        return new HorizontalLayout(author, title);
+        return new HorizontalLayout(author, title, position);
     }
 
     private HorizontalLayout createButtonsLayout() {
@@ -85,7 +92,7 @@ public class BookForm extends VerticalLayout {
     }
 
     public static abstract class BookFormEvent extends ComponentEvent<BookForm> {
-        private Book book;
+        private final Book book;
 
         protected BookFormEvent(BookForm source, Book book){
             super(source, false);

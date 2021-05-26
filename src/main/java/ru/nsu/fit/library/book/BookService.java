@@ -15,7 +15,7 @@ public class BookService {
     }
 
     public List<Book> findAll() {
-        return (List<Book>) bookRepository.findAll();
+        return bookRepository.findAll();
     }
 
     public List<Book> findAll(String filterText) {
@@ -45,6 +45,10 @@ public class BookService {
 
     public List<Book> findNotGiven(){
         return bookRepository.findNotGiven();
+    }
+
+    public List<Object[]> findBooksByPopularity() {
+        return bookRepository.findBooksByPopularity();
     }
 
 }

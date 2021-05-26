@@ -28,8 +28,8 @@ public class BookServiceTest {
     @DisplayName("test finding all books")
     void testFindAll() {
         Author author = new Author(1L, "Alex", "Smith", new ArrayList<>());
-        Book b1 = new Book(1L, "title 1", author);
-        Book b2 = new Book(2L, "Title 2", author);
+        Book b1 = new Book(1L, "title 1", author, null);
+        Book b2 = new Book(2L, "Title 2", author, null);
         doReturn(Arrays.asList(b1, b2)).when(repository).findAll();
 
         List<Book> books = service.findAll();
@@ -41,9 +41,9 @@ public class BookServiceTest {
     @DisplayName("test finding books with text in title")
     void testFindAllByTitle() {
         Author author = new Author(1L, "Alex", "Smith", new ArrayList<>());
-        Book b1 = new Book(1L, "title 1", author);
-        Book b2 = new Book(2L, "Title text2", author);
-        Book b3 = new Book(3L, "title text 3", author);
+        Book b1 = new Book(1L, "title 1", author, null);
+        Book b2 = new Book(2L, "Title text2", author, null);
+        Book b3 = new Book(3L, "title text 3", author, null);
         doReturn(Arrays.asList(b1, b2, b3)).when(repository).findAll();
         doReturn(Arrays.asList(b1, b2)).when(repository).search("text");
 
@@ -61,9 +61,9 @@ public class BookServiceTest {
     @DisplayName("test fetching")
     void testFetch() {
         Author author = new Author(1L, "Alex", "Smith", new ArrayList<>());
-        Book b1 = new Book(1L, "title 1", author);
-        Book b2 = new Book(2L, "Title text2", author);
-        Book b3 = new Book(3L, "title text 3", author);
+        Book b1 = new Book(1L, "title 1", author, null);
+        Book b2 = new Book(2L, "Title text2", author, null);
+        Book b3 = new Book(3L, "title text 3", author, null);
         doReturn(new PageImpl<>(Arrays.asList(b1, b2, b3))).when(repository).findAll(PageRequest.of(1, 1));
 
         List<Book> books = service.fetch(1, 1);
@@ -75,7 +75,7 @@ public class BookServiceTest {
     @DisplayName("test save()")
     void testSave() {
         Author author = new Author(1L, "Alex", "Smith", new ArrayList<>());
-        Book b1 = new Book(1L, "title 1", author);
+        Book b1 = new Book(1L, "title 1", author, null);
         doReturn(b1).when(repository).save(any());
 
         Book returned = service.save(b1);
@@ -86,7 +86,7 @@ public class BookServiceTest {
     @DisplayName("test delete()")
     void testDelete(){
         Author author = new Author(1L, "Alex", "Smith", new ArrayList<>());
-        Book b1 = new Book(1L, "title 1", author);
+        Book b1 = new Book(1L, "title 1", author, null);
         doNothing().when(repository).delete(b1);
 
         service.delete(b1);
@@ -97,7 +97,7 @@ public class BookServiceTest {
     @DisplayName("test exist()")
     void testExist() {
         Author author = new Author(1L, "Alex", "Smith", new ArrayList<>());
-        Book b1 = new Book(1L, "title 1", author);
+        Book b1 = new Book(1L, "title 1", author, null);
         doReturn(true).when(repository).existsBookByTitleAndAuthor(any(), any());
 
         service.exist(b1);
@@ -111,4 +111,13 @@ public class BookServiceTest {
         service.findNotGiven();
         verify(repository, times(1)).findNotGiven();
     }
+
+    @Test
+    @DisplayName("test findBooksByPopularity()")
+    void findBooksByPopularity() {
+        doReturn(new ArrayList<>()).when(repository).findBooksByPopularity();
+        service.findBooksByPopularity();
+        verify(repository, times(1)).findBooksByPopularity();
+    }
+
 }

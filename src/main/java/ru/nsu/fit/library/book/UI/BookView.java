@@ -12,27 +12,28 @@ import ru.nsu.fit.library.book.Book;
 import ru.nsu.fit.library.book.BookService;
 import ru.nsu.fit.library.book.author.Author;
 import ru.nsu.fit.library.book.author.AuthorService;
+import ru.nsu.fit.library.bookPosition.BookPositionService;
 import ru.nsu.fit.library.main.UI.MainView;
 import java.util.List;
 
 @Route(value = "books", layout = MainView.class)
 public class BookView extends VerticalLayout {
     private final TextField filterText = new TextField();
-    private final BookService bookService;
     private final PaginatedGrid<Book> grid = new PaginatedGrid<>(Book.class);
-
     DataProvider<Book, Void> dataProvider;
+
+    private final BookService bookService;
 
     private final BookForm form;
 
-    public BookView(BookService bookService, AuthorService authorService) {
+    public BookView(BookService bookService, AuthorService authorService, BookPositionService bookPositionService) {
         this.bookService = bookService;
         addClassName("book-view");
         setSizeFull();
-        dataProvider = createDataProvider(bookService);
+        dataProvider = createDataProvider();
         HorizontalLayout toolbar = configureToolBar();
         configureGrid();
-        form = new BookForm(authorService, bookService);
+        form = new BookForm(authorService, bookService,bookPositionService);
         form.addListener(BookForm.saveEvent.class, this::saveBook);
         form.addListener(BookForm.deleteEvent.class, this::deleteBook);
         form.addListener(BookForm.closeEvent.class, e -> closeEditor());
@@ -71,12 +72,12 @@ public class BookView extends VerticalLayout {
             Author author = book.getAuthor();
             return author.toString();
         }).setHeader("Author").setSortProperty("author");
+        grid.addColumn(Book::getBookLocation).setHeader("Location").setSortProperty("location");
+        grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.setPageSize(10);
         grid.setDataProvider(dataProvider);
-
         grid.asSingleSelect().addValueChangeListener(event -> editBook(event.getValue()));
     }
-
 
     private void closeEditor() {
         grid.asSingleSelect().clear();
@@ -107,25 +108,19 @@ public class BookView extends VerticalLayout {
         }
     }
 
-    private DataProvider<Book, Void> createDataProvider(BookService bookService) {
+    private DataProvider<Book, Void> createDataProvider() {
         DataProvider<Book, Void> dataProvider = DataProvider.fromCallbacks(
                 query -> {
                     int offset = query.getOffset();
                     int limit = query.getLimit();
                     int page = offset/limit;
-                    List<Book> books = getBookService().fetch(page, limit);
+                    List<Book> books = bookService.fetch(page, limit);
                     return books.stream();
                 },
 
-                query -> {
-                    return (int) getBookService().findAll().size();
-                }
+                query -> bookService.findAll().size()
         );
         return dataProvider;
-    }
-
-    private BookService getBookService() {
-        return bookService;
     }
 }
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,5 +81,12 @@ public class ReaderServiceTest {
         Assertions.assertTrue(readerService.exist(reader3));
         Assertions.assertFalse(readerService.exist(reader4));
         Assertions.assertFalse(readerService.exist(reader5));
+    }
+
+    @Test
+    void findReadersExpired() {
+        doReturn(new ArrayList<>()).when(readerRepository).findReadersExpired();
+        readerService.findReadersExpired();
+        verify(readerRepository, times(1)).findReadersExpired();
     }
 }
