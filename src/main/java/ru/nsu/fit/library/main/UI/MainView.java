@@ -7,6 +7,7 @@ import com.vaadin.flow.router.RouterLink;
 import ru.nsu.fit.library.book.UI.BookView;
 import ru.nsu.fit.library.book.author.UI.AuthorView;
 import ru.nsu.fit.library.bookPosition.UI.BookPositionView;
+import ru.nsu.fit.library.distribution.UI.DistributionByReaderView;
 import ru.nsu.fit.library.distribution.UI.DistributionView;
 import ru.nsu.fit.library.library.UI.LibraryView;
 import ru.nsu.fit.library.queriesUI.Q_1;
@@ -37,6 +38,8 @@ public class MainView extends AppLayout {
         library.getSubMenu().addItem(new RouterLink("Library", LibraryView.class));
         specialTasks.getSubMenu().addItem(new RouterLink("Get the most popular books among readers", Q_1.class));
         specialTasks.getSubMenu().addItem(new RouterLink("Get readers with expired books", Q_2.class));
+        specialTasks.getSubMenu().addItem(
+                new RouterLink("Get distribution records of person", DistributionByReaderView.class));
 
         addToNavbar(menuBar);
     }

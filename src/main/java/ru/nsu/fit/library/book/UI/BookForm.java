@@ -73,13 +73,7 @@ public class BookForm extends VerticalLayout {
     private void validateAndSave() {
         try {
             bookBinder.writeBean(book);
-            if (!bookService.exist(book)) {
-                fireEvent(new saveEvent(this, book));
-            }
-            else {
-                Notification.show("Save error: "+ "This item already exists").
-                        setPosition(Notification.Position.TOP_START);
-            }
+            fireEvent(new saveEvent(this, book));
         }
         catch (ValidationException err) {
             err.printStackTrace();
