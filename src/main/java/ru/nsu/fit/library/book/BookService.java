@@ -31,11 +31,6 @@ public class BookService {
         return bookRepository.findAll(pr).getContent();
     }
 
-    public int getCount(int limit) {
-        PageRequest pr = PageRequest.of(0, limit);
-        return bookRepository.findAll(pr).getTotalPages();
-    }
-
     public Book save(Book book) {
         return bookRepository.save(book);
     }
